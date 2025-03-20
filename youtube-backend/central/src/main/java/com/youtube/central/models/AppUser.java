@@ -30,5 +30,5 @@ public class AppUser {
     String gender;
     String country;
     LocalDateTime createdAt;
-    LocalDateTime updatedAt; 
+    LocalDateTime updatedAt;
 }
