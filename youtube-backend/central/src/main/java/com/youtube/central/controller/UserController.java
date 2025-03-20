@@ -10,7 +10,7 @@ import com.youtube.central.models.AppUser;
 import com.youtube.central.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/central/user")
 public class UserController {
 
     private UserService userService;
@@ -20,8 +20,8 @@ public class UserController {
         this.userService=userService;
     }
     @PostMapping("/register")
-    public AppUser registerUser(@RequestBody AppUser user){
-        AppUser appUser=userService.registerUser(user);
-        return appUser;
+    public void registerUser(@RequestBody AppUser user){
+        userService.registerUser(user);
+        
     }
 }
