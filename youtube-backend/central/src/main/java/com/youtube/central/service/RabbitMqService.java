@@ -6,14 +6,18 @@ import org.springframework.stereotype.Service;
 
 import com.youtube.central.dto.NotificationMessage;
 
-@Service
+@Service 
 public class RabbitMqService {
 
     @Autowired
-    private RabbitTemplate rabbitTemplate;
-    
-    public void sendNotificationMessageToQueue(NotificationMessage message) {
+    RabbitTemplate rabbitTemplate;
+
+    public final String exchangeName = "notification-exchange";
+    public final String routingKey = "notification-123";
+    public void insertMessageToQueue(NotificationMessage message){
         // Logic to send notification message using RabbitMQ
+        // with the combination of exchange and routing key we uniquely identify queue
+        rabbitTemplate.convertAndSend(exchangeName, routingKey, message);
     }
     
 }

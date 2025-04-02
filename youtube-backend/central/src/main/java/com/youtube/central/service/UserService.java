@@ -24,10 +24,11 @@ public class UserService {
         user.setUpdatedAt(LocalDateTime.now());
         appUserRepo.save(user);
         //insert user registration message payload to rabbitmq
-        NotificationMessage notificationMessage=new NotificationMessage();
-        notificationMessage.setPurpose("User-Registration");
-        notificationMessage.setEmail(user.getEmail());
-        rabbitMqService.sendNotificationMessageToQueue(notificationMessage);
+        NotificationMessage message=new NotificationMessage();
+        message.setEmail(user.getEmail());
+        message.setType("user-registration");
+        message.setName(user.getName());
+        rabbitMqService.insertMessageToQueue(message);
          
     }
     

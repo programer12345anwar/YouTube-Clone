@@ -1,4 +1,4 @@
-package com.youtube.central.dto;
+package com.youtube.notification_api.dto;
 
 import lombok.Data;
 
