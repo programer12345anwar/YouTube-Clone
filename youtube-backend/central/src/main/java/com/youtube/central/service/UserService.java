@@ -26,7 +26,7 @@ public class UserService {
         //insert user registration message payload to rabbitmq
         NotificationMessage message=new NotificationMessage();
         message.setEmail(user.getEmail());
-        message.setType("user-registration");
+        message.setType("user_registration");
         message.setName(user.getName());
         rabbitMqService.insertMessageToQueue(message);
          
