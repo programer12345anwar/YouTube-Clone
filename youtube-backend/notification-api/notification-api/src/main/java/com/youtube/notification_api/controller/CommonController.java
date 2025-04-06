@@ -28,7 +28,7 @@ public class CommonController {
             if(message.getType().equals(NotificationType.user_registration.toString())){
                 log.info("Calling common user service to registration mail");
                 commonUserService.sendUserRegistrationEmail(message);
-            }/*else if(message.getType().equals(NotificationType.subscriber_added.toString())){
+            }else if(message.getType().equals(NotificationType.subscriber_added.toString())){
                 // If the message type is subscriber added i need to send a mail to the user that a new subscriber is added in your channel
                 log.info("Message type is subscriber_added");
                 commonUserService.sendSubscriberAddedMail(message);
@@ -38,7 +38,7 @@ public class CommonController {
             }else if(message.getType().equals(NotificationType.new_video.toString())){
                 log.info("got type of message as new_video");
                 commonUserService.notifyNewVideoUploadedToSubscriber(message);
-            }*/
+            }
         }catch(Exception e){
             log.error(e.getMessage());
         }

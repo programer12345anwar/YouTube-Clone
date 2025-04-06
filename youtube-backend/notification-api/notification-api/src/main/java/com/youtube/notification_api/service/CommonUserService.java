@@ -57,7 +57,7 @@ public class CommonUserService {
     public void sendCreateChannelNotification(NotificationMessage message) throws Exception{
         log.info("CommonUserService:  Inside sendCreateChannelNotification method");
         // We need to send html kind of email that your channel got created over our portal
-        Context context = new Context();
+        Context context = new Context();//Context is a class from thymeleaf, it is just like a container of variables 
         context.setVariable("userName", message.getName());
         context.setVariable("platformName", platformName);
         String htmlEmailContent = templateEngine.process("create-channel-email", context);

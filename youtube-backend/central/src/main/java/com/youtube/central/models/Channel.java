@@ -19,6 +19,8 @@ public class Channel {
     UUID id;
     @ManyToOne
     AppUser user;
+    String channelName;
+    String description;
     Double watchHours;
     boolean isMonetized;
     int totalViews;
@@ -28,4 +30,6 @@ public class Channel {
     List<Video> videos;
     @OneToMany
     List<PlayList> playLists;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt; 
 }

@@ -16,19 +16,17 @@ public class Config {
         return new TemplateEngine();
     }
 
-    // @Bean
-    // public JavaMailSender getJavaMailSender(){
-    //     JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-    //     mailSender.setHost("smtp.gmail.com");
-    //     mailSender.setPort(587);
-    //     // mailSender.setUsername("accioshoppingwebsite@gmail.com");
-    //     mailSender.setUsername("mdanwar40212@gmail.com");
-    //     // mailSender.setPassword("relcfdwhahhcvokv");
-    //     mailSender.setPassword("rdzdkrzeciiwirgf");
-    //     Properties props = mailSender.getJavaMailProperties();
-    //     props.put("mail.smtp.auth", "true");
-    //     props.put("mail.smtp.starttls.enable", "true");
-    //     return mailSender;
-    // }
+    @Bean
+    public JavaMailSender getJavaMailSender(){
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("mdanwar40212@gmail.com");
+        mailSender.setPassword("rdzdkrzeciiwirgf");
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        return mailSender;
+    }
 }
  

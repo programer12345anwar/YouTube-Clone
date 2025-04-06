@@ -19,20 +19,10 @@ public class UserService {
         this.appUserRepo = appUserRepo;
         this.rabbitMqService = rabbitMqService;
     }
-    /* 
-    public void registerUser(AppUser user) {
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-        appUserRepo.save(user);
-        //insert user registration message payload to rabbitmq
-        NotificationMessage message=new NotificationMessage();
-        message.setEmail(user.getEmail());
-        message.setType("user_registration");
-        message.setName(user.getName());
-        rabbitMqService.insertMessageToQueue(message);
-         
+
+    public AppUser getUserByEmail(String email) {
+        return appUserRepo.findByEmail(email);
     }
-    */
     public void registerUser(AppUser user){
         // Call repository layer to save the user
         user.setCreatedAt(LocalDateTime.now());
