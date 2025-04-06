@@ -1,3 +1,4 @@
+
 package com.youtube.notification_api.controller;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -14,23 +15,32 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class CommonController {
+
     @Autowired
     CommonUserService commonUserService;
 
-    @RabbitListener(queues="notification-queue")
+    @RabbitListener(queues = "notification-queue")
     public void consumeMessage(@Payload NotificationMessage message) throws Exception {
-        //it will run at the point of time some notification message payload is inserted inside the notification-queue and as the listener is subscibed to the  queue it will automatically get triggered
-
-        log.info("Notification Message received successfully payload= "+message.toString());
-        if(message.getType().equals(NotificationType.user_registration.toString())){
-            log.info("Calling common user service to send registration mail");
-            commonUserService.sendUserRegistrationEmail(message);
-        }else if(message.getType().equals(NotificationType.channel_owner_subscriber_added.toString())){
-
-        }else{
-            
+        // It will run at the point of time some notification message payload is inserted inside
+        // Notification-queue and as the listner is subscribed to the queue it will automatically get triggered
+        log.info("Notification Message recieved successfully payload = " + message.toString());
+        try{
+            if(message.getType().equals(NotificationType.user_registration.toString())){
+                log.info("Calling common user service to registration mail");
+                commonUserService.sendUserRegistrationEmail(message);
+            }/*else if(message.getType().equals(NotificationType.subscriber_added.toString())){
+                // If the message type is subscriber added i need to send a mail to the user that a new subscriber is added in your channel
+                log.info("Message type is subscriber_added");
+                commonUserService.sendSubscriberAddedMail(message);
+            }else if(message.getType().equals(NotificationType.create_channel.toString())){
+                log.info("CommonController: Type of notification is create_channel calling commonuserservice");
+                commonUserService.sendCreateChannelNotification(message);
+            }else if(message.getType().equals(NotificationType.new_video.toString())){
+                log.info("got type of message as new_video");
+                commonUserService.notifyNewVideoUploadedToSubscriber(message);
+            }*/
+        }catch(Exception e){
+            log.error(e.getMessage());
         }
-
     }
-    
 }

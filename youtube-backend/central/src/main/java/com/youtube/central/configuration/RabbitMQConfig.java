@@ -1,5 +1,6 @@
 package com.youtube.central.configuration;
 
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -11,27 +12,29 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class RabbitMQConfig {
-    //configuration for RabbitMQ
 
-    public final static String exchangeName = "notification-exchange";
-    public final static String queueName = "notification-queue";
-    public final static String routingKey = "notification-123";
+    public final String exchangeName = "notification-exchange";
+    public final String queueName = "notification-queue";
+
+    public final String routingKey = "notification-123";
 
     @Bean
-    public DirectExchange getDirectExchange() {
-        return new DirectExchange(exchangeName);
+    public DirectExchange getDirectExchange(){
+        DirectExchange exchange = new DirectExchange(exchangeName);
+        return exchange;
     }
 
     @Bean
-    public Queue getMessagingQueue() {
-        return QueueBuilder.durable(queueName).build();  // Fixed issue: using queueName instead of exchangeName
+    public Queue getMessagingQueue(){
+        return QueueBuilder.durable(queueName).build();
     }
 
     @Bean
-    public CachingConnectionFactory getConnectionFactory() { 
-        // CachingConnectionFactory establishes a connection to RabbitMQ
+    public CachingConnectionFactory getConnectionFactory(){
+        // ConnectionFactory is nothing but connection deatils for rabbbitmq server
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
         connectionFactory.setUsername("guest");
         connectionFactory.setPassword("guest");
@@ -39,13 +42,15 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public RabbitTemplate getRabbitTemplate(CachingConnectionFactory connectionFactory) {
+    public RabbitTemplate getRabbitTemplate(CachingConnectionFactory connectionFactory){
+        // JSON -> Class Objects
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
         return rabbitTemplate;
     }
 
-    public Binding bindingQueueWithExchange(DirectExchange exchange, Queue queue) {
+    @Bean
+    public Binding bindQueueWithExchange(DirectExchange exchange, Queue queue){
         return BindingBuilder.bind(queue).to(exchange).with(routingKey);
     }
 }
