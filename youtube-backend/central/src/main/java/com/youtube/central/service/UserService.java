@@ -1,6 +1,7 @@
 package com.youtube.central.service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,10 @@ public class UserService {
         message.setType("user_registration");
         message.setName(user.getName());
         rabbitMqService.insertMessageToQueue(message);
+    }
+
+     public AppUser getUserById(UUID userId){
+        return appUserRepo.findById(userId).orElse(null);
     }
     
 }
