@@ -33,5 +33,6 @@ nav{
 .nav-right img{
     width: 25px;
     margin-left: 20px;
+    border-radius:50%;
 }
  
