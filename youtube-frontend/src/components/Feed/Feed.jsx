@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import thumbnail1 from '../../assets/thumbnail1.png'
 import './Feed.css'
 import { Link } from 'react-router-dom'
-import { API_KEY } from '../../data.js'
+import { API_KEY, value_converter } from '../../data.js'
+import moment from 'moment'
 
 const Feed = ({ category }) => {
   const [data, setData] = useState([])
@@ -30,16 +30,9 @@ const Feed = ({ category }) => {
           <img src={item.snippet.thumbnails.medium.url} alt='' />
           <h2>{item.snippet.title}</h2>
           <h3>{item.snippet.channelTitle}</h3>
-          <p>{item.statistics.viewCount} views &bull; {item.snippet.publishedAt}</p>
+          <p>{value_converter(item.statistics.viewCount)} views &bull; {moment(item.snippet.publishedAt).fromNow()}</p>
         </Link>
       ))}
-
-      <Link to={`video/20/5421`} className='card'>
-        <img src={thumbnail1} alt='' />
-        <h2>Best channel to learn coding that helps you become a good software engineer</h2>
-        <h3>GreatStack</h3>
-        <p>15K views &bull; 2 days ago</p>
-      </Link>
     </div>
   )
 }
