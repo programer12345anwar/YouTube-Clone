@@ -35,4 +35,55 @@ nav{
     margin-left: 20px;
     border-radius:50%;
 }
+@media (max-width: 900px) {
+    .menu-icon {
+        display: none;
+    }
+
+    .nav-right img {
+        display: none !important; /* Hide all nav-right icons forcefully */
+    }
+
+    .nav-right .user-icon {
+        display: inline-block !important; /* Explicitly show profile image */
+        width: 30px;
+        margin-left: 10px;
+    }
+
+    .logo {
+        margin-top: 15px;
+        width: 80px;
+    }
+
+    .nav-middle .search-box input {
+        width: 100px;
+    }
+
+    .nav-middle .search-box {
+        padding: 5px 8px;
+    }
+}
+
+/*
+@media (max-width: 900px) {
+    
+    .menu-icon{
+        display: none;
+    }
+    .nav-right img{
+        display: none;
+    }
+    .nav-right .user-icon{
+        display: block;
+        width: 30px;
+    }
+    .logo{
+        margin-top: 15px;
+        width: 80px;
+    }
+    .nav-middle .search-box input{
+        width: 100px;
+    }
+}
+    */
  
