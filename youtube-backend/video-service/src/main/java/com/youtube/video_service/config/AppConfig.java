@@ -1,5 +1,6 @@
 package com.youtube.video_service.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -29,10 +30,10 @@ public class AppConfig {
     }
     
 
-    // @Bean
-    // public ModelMapper getMapper(){
-    //     return new ModelMapper();
-    // }
+    @Bean
+    public ModelMapper getMapper(){
+        return new ModelMapper();
+    }
 
     @Bean
     public ApiTemplate getApiTemplate(){
