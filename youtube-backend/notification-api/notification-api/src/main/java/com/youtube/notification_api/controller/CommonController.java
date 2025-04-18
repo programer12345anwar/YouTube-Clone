@@ -42,5 +42,6 @@ public class CommonController {
         }catch(Exception e){
             log.error(e.getMessage());
         }
+        
     }
 }

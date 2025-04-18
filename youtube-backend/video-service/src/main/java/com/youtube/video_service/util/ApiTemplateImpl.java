@@ -26,7 +26,7 @@ public class ApiTemplateImpl implements ApiTemplate {
             return url;
         }
         int count = 1;
-        url += "?";
+        url += "?";//before adding query params
         for(String key: queryParams.keySet()){
             url += key + "=" + queryParams.get(key);
             if(count < queryParams.size()){
@@ -51,7 +51,7 @@ public class ApiTemplateImpl implements ApiTemplate {
         RequestEntity request = RequestEntity.get(finalUrl).build();
         // After creating request i need to hit the request
         // So, to hit request we need a library that is rest template
-        ResponseEntity<Object> response = restTemplate.exchange(finalUrl, HttpMethod.GET, request, Object.class);
+        ResponseEntity<Object> response = restTemplate.exchange(finalUrl, HttpMethod.GET, request, Object.class);//i will be able to catch any type of response body
         return response.getBody();
     }
 
@@ -62,7 +62,7 @@ public class ApiTemplateImpl implements ApiTemplate {
         headers.add("Authorization", "Bearer " + token);
         RequestEntity request = RequestEntity.post(url).body(requestBody);
         HttpEntity httpEntity = new HttpEntity(request, headers);
-        ResponseEntity<Object> response = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class);
+        ResponseEntity<Object> response = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class);//i will be able to catch any type of response body
         return response.getBody();
     }
 
