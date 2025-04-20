@@ -18,13 +18,17 @@ import com.youtube.video_service.dto.VideoDetailRequestBody;
 import com.youtube.video_service.exception.InvalidFileType;
 import com.youtube.video_service.service.UploadService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/v1/video")
+@Slf4j
 public class VideoController {
     
   @Autowired
     UploadService uploadService;
 
+    /* 
     @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
     public ResponseEntity uploadVideo(@RequestPart("videoFile")MultipartFile video,
                                       @RequestParam UUID channelId,
@@ -42,5 +46,25 @@ public class VideoController {
             generalMessage.setMessage(e.getMessage());
             return new ResponseEntity(generalMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }*/
+
+    /* function to upload video on imagekit 
+    @PostMapping("/upload")
+    public ResponseEntity uploadVideo(@RequestPart("videoFile") MultipartFile video) {
+    log.info("video received at upload method");
+    try {
+        VideoDetail videoDetail = uploadService.uploadVideo(video);
+        log.info("Video detail after upload is {}", videoDetail);
+        return new ResponseEntity(videoDetail, HttpStatus.CREATED); // 201
+    } catch (InvalidFileType invalidFileType) {
+        GeneralMessage generalMessage = new GeneralMessage();
+        generalMessage.setMessage(invalidFileType.getMessage());
+        return new ResponseEntity(generalMessage, HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
+        GeneralMessage generalMessage = new GeneralMessage();
+        generalMessage.setMessage(e.getMessage());
+        return new ResponseEntity(generalMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    }
+    */
 }

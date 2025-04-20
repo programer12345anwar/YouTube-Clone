@@ -21,8 +21,10 @@ import io.imagekit.sdk.exceptions.UnauthorizedException;
 import io.imagekit.sdk.exceptions.UnknownException;
 import io.imagekit.sdk.models.FileCreateRequest;
 import io.imagekit.sdk.models.results.Result;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class UploadService {
    @Autowired
     ImageKit imageKit;
@@ -64,8 +66,41 @@ public class UploadService {
             videoDetailsDTO.setUpdatedAt(LocalDateTime.now());
             videoDetailsDTO.setName(videoDetails.getName());
             videoDetailsDTO.setDescription(videoDetails.getDescription());
-            centralApiConnectionService.saveVideoDetails(channelId, videoDetailsDTO);
+            //centralApiConnectionService.saveVideoDetails(channelId, videoDetailsDTO);
 
+
+            return videoDetail;
+    }
+
+    //for test purposes to upload video to the imagekit
+
+    public VideoDetail uploadVideo(MultipartFile video) throws IOException, Exception, BadRequestException, UnknownException, ForbiddenException, TooManyRequestsException, UnauthorizedException {
+        boolean isVideo = isVideoFile(video);
+        if(!isVideo){
+            throw new InvalidFileType("File uploaded is not video");
+        }
+
+            // If file is of type video then we need to convert it in byte array
+            byte [] videoBytes = video.getBytes(); // so to pass over the network we are converting our multipart file to videobytes
+            // We need to create one request which we will upload it to imagekit.io
+            FileCreateRequest videoRequest = new FileCreateRequest(videoBytes, video.getOriginalFilename());
+            videoRequest.setUseUniqueFileName(true);
+
+            log.info("Video request is {}", videoRequest);
+
+            Result result = imageKit.upload(videoRequest); // By this line video will get uploaded over image kit server.
+
+            log.info("Result is {}", result);
+
+            String videoId = result.getFileId();
+            String videoUrl = result.getUrl();
+
+            log.info(videoUrl, videoId, videoUrl);
+
+            VideoDetail videoDetail = new VideoDetail();
+            videoDetail.setVideoId(videoId);
+            videoDetail.setVideoUrl(videoUrl);
+            log.info(videoUrl, videoDetail);
 
             return videoDetail;
     }

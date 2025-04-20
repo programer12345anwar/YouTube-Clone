@@ -24,7 +24,7 @@ public class AppConfig {
     @Bean
     public ImageKit getImageKit() throws Exception{
          ImageKit imageKit = ImageKit.getInstance();
-         Configuration configuration = new Configuration(publicKey, privateKey, urlEndPoint);
+         Configuration configuration = new Configuration(publicKey, privateKey, urlEndPoint);//this will helps to connect with imagekit server
          imageKit.setConfig(configuration);
          return imageKit;
     }
