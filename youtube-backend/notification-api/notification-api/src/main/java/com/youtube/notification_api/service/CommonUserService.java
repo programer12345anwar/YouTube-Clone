@@ -85,6 +85,7 @@ public class CommonUserService {
         mailService.sendEmail(mimeMessage);
     }
 
+
     public void notifyNewVideoUploadedToSubscriber(NotificationMessage notificationMessage) throws Exception{
         String subscriberEmail = notificationMessage.getEmail();
         String subscriberName = notificationMessage.getName();

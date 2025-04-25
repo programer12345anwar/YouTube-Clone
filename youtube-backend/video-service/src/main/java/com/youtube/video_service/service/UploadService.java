@@ -40,6 +40,7 @@ public class UploadService {
     public VideoDetail uploadVideo(MultipartFile video,
                                    UUID channelId,
                                    VideoDetailRequestBody videoDetails) throws IOException, ForbiddenException, TooManyRequestsException, InternalServerException, UnauthorizedException, BadRequestException, UnknownException {
+        log.info("called to service later to upload video over channel");
         boolean isVideo = isVideoFile(video);
         if(!isVideo){
             throw new InvalidFileType("File uploaded is not video");
@@ -50,13 +51,15 @@ public class UploadService {
             // We need to create one request which we will upload it to imagekit.io
             FileCreateRequest videoRequest = new FileCreateRequest(videoBytes, video.getOriginalFilename());
             videoRequest.setUseUniqueFileName(true);
+            log.info("called to imagekit server to upload video over image kit to return video id and link");
             Result result = imageKit.upload(videoRequest); // By this line video will get uploaded over image kit server.
+            log.info("this is the result"+result);
             String videoId = result.getFileId();
             String videoUrl = result.getUrl();
             VideoDetail videoDetail = new VideoDetail();
             videoDetail.setVideoId(videoId);
             videoDetail.setVideoUrl(videoUrl);
-
+            log.info("after uploading video over imagekit"+" "+videoId+" "+videoUrl);
             // We need to make a call to central api to save video details in video detail table.
             VideoDetailsDTO videoDetailsDTO = new VideoDetailsDTO();
             videoDetailsDTO.setVideoLink(videoUrl);
@@ -66,13 +69,13 @@ public class UploadService {
             videoDetailsDTO.setUpdatedAt(LocalDateTime.now());
             videoDetailsDTO.setName(videoDetails.getName());
             videoDetailsDTO.setDescription(videoDetails.getDescription());
-            //centralApiConnectionService.saveVideoDetails(channelId, videoDetailsDTO);
-
-
+            // log.info("this is videoDetailsDTO"+videoDetailsDTO);
+            centralApiConnectionService.saveVideoDetails(channelId, videoDetailsDTO);
             return videoDetail;
     }
 
     //for test purposes to upload video to the imagekit
+    /* 
 
     public VideoDetail uploadVideo(MultipartFile video) throws IOException, Exception, BadRequestException, UnknownException, ForbiddenException, TooManyRequestsException, UnauthorizedException {
         boolean isVideo = isVideoFile(video);
@@ -90,18 +93,19 @@ public class UploadService {
 
             Result result = imageKit.upload(videoRequest); // By this line video will get uploaded over image kit server.
 
-            log.info("Result is {}", result);
+            
 
             String videoId = result.getFileId();
             String videoUrl = result.getUrl();
 
-            log.info(videoUrl, videoId, videoUrl);
+            // log.info(videoUrl, videoId, videoUrl);
 
             VideoDetail videoDetail = new VideoDetail();
             videoDetail.setVideoId(videoId);
             videoDetail.setVideoUrl(videoUrl);
-            log.info(videoUrl, videoDetail);
+            // log.info(videoUrl, videoDetail);
 
             return videoDetail;
     }
+            */
 }

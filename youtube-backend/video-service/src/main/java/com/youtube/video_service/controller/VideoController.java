@@ -24,17 +24,19 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/v1/video")
 @Slf4j
 public class VideoController {
-    
+
   @Autowired
     UploadService uploadService;
 
-    /* 
+
     @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
     public ResponseEntity uploadVideo(@RequestPart("videoFile")MultipartFile video,
                                       @RequestParam UUID channelId,
                                       @RequestPart("videodetails") VideoDetailRequestBody videoDetails){
 
+
         try{
+            log.info("received call to upload video at video controller");
             VideoDetail videoDetail = uploadService.uploadVideo(video, channelId, videoDetails);
             return new ResponseEntity(videoDetail, HttpStatus.CREATED); // 201
         }catch (InvalidFileType invalidFileType){
@@ -46,7 +48,7 @@ public class VideoController {
             generalMessage.setMessage(e.getMessage());
             return new ResponseEntity(generalMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
 
     /* function to upload video on imagekit 
     @PostMapping("/upload")

@@ -1,5 +1,6 @@
 package com.youtube.video_service.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -8,6 +9,7 @@ import java.net.URI;
 import java.util.Map;
 
 
+@Slf4j
 public class ApiTemplateImpl implements ApiTemplate {
 
     @Autowired
@@ -55,16 +57,56 @@ public class ApiTemplateImpl implements ApiTemplate {
         return response.getBody();
     }
 
+    // @Override
+    // public Object makePostCall(String apiUrl, String endPoint, Map<String, String> queryParams, Object requestBody, String token) {
+    //     URI url = this.createUrl(apiUrl, endPoint, queryParams);
+    //     HttpHeaders headers = new HttpHeaders();
+    //     headers.add("Authorization", "Bearer " + token);
+    //     RequestEntity request = RequestEntity.post(url).body(requestBody);
+    //     HttpEntity httpEntity = new HttpEntity(request, headers);
+    //     ResponseEntity<Object> response = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class);//i will be able to catch any type of response body
+    //     return response.getBody();
+    // }
+
     @Override
-    public Object makePostCall(String apiUrl, String endPoint, Map<String, String> queryParams, Object requestBody, String token) {
+    public Object makePostCall(String apiUrl, String endPoint, Map<String, String> queryParams, Object requestBody) {
         URI url = this.createUrl(apiUrl, endPoint, queryParams);
+
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + token);
-        RequestEntity request = RequestEntity.post(url).body(requestBody);
-        HttpEntity httpEntity = new HttpEntity(request, headers);
-        ResponseEntity<Object> response = restTemplate.exchange(url, HttpMethod.POST, httpEntity, Object.class);//i will be able to catch any type of response body
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        RequestEntity<Object> request = RequestEntity
+                .post(url)
+                .headers(headers)
+                .body(requestBody);
+
+        ResponseEntity<Object> response = restTemplate.exchange(request, Object.class);
         return response.getBody();
     }
+
+//    @Override
+//    public Object makePostCall(String apiUrl, String endPoint, Map<String, String> queryParams, Object requestBody) {
+//        URI url = this.createUrl(apiUrl, endPoint, queryParams);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        RequestEntity<Object> request = RequestEntity
+//                .post(url)
+//                .headers(headers)
+//                .body(requestBody);
+//
+//        ResponseEntity<Object> response = restTemplate.exchange(request, Object.class);
+//
+////        log.info("Central API response status: {}", response.getStatusCode());
+////        if (response.getBody() == null) {
+////            log.warn("Central API returned a null body");
+////        }
+//
+//        return response.getBody();
+//    }
+
+
 
     @Override
     public Object makePutCall(String apiUrl, String endPoint, Map<String, String> queryParams, Object requestBody) {
