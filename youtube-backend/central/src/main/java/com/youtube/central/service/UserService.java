@@ -3,6 +3,8 @@ package com.youtube.central.service;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.youtube.central.dto.UserCredentialDTO;
+import com.youtube.central.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,22 @@ public class UserService {
         this.appUserRepo = appUserRepo;
         this.rabbitMqService = rabbitMqService;
     }
+    @Autowired
+    private JwtUtil jwtUtil;
 
     public AppUser getUserByEmail(String email) {
         return appUserRepo.findByEmail(email);
+    }
+
+    public String userLogin(UserCredentialDTO credential){
+        String email=credential.getEmail();
+        AppUser user=this.getUserByEmail(email);
+        if(user.getPassword().equals(credential.getPassword())){
+            //generate token
+            String cred=user.getEmail()+":"+user.getPassword();
+            return jwtUtil.generateToken(cred);
+        }
+        return "Incorrect Password";
     }
     public void registerUser(AppUser user){
         // Call repository layer to save the user

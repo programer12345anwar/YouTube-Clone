@@ -24,6 +24,7 @@ public class AppUser {
     String name;
     @Column(unique = true)
     String email;
+    String password;
     @Column(unique = true)
     Long phoneNumber;
     LocalDate dob;
