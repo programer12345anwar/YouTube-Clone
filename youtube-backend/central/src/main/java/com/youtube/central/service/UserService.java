@@ -22,8 +22,8 @@ public class UserService {
         this.appUserRepo = appUserRepo;
         this.rabbitMqService = rabbitMqService;
     }
-    @Autowired
-    private JwtUtil jwtUtil;
+//    @Autowired
+//    private JwtUtil jwtUtil; //due to circular dependency
 
     public AppUser getUserByEmail(String email) {
         return appUserRepo.findByEmail(email);
@@ -35,7 +35,8 @@ public class UserService {
         if(user.getPassword().equals(credential.getPassword())){
             //generate token
             String cred=user.getEmail()+":"+user.getPassword();
-            return jwtUtil.generateToken(cred);
+//            return jwtUtil.generateToken(cred); due to circular dependency
+            return cred;
         }
         return "Incorrect Password";
     }

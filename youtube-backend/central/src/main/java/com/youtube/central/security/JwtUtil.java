@@ -4,6 +4,7 @@ import com.youtube.central.models.AppUser;
 import com.youtube.central.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.AccessType;
@@ -13,9 +14,10 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class JwtUtil {
-
-
+    @Autowired
+    UserService userService;
     @Value("${central.security.secret.key}")
     String secretKey;
 
@@ -28,16 +30,20 @@ public class JwtUtil {
     // We got the credentials generateToken function we will encrypt credentials with the help of algorithm and secret key
 
     public String generateToken(String credentials){
+        log.info("user credential is:"+credentials);
         String jwtToken = Jwts.builder().setSubject(credentials)
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
+        log.info("jwt token is: "+jwtToken);
         return jwtToken;
     }
 
 
-    /*public String decryptToken(String token){
+
+
+    public String decryptToken(String token){
         String credentials =  Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
@@ -45,10 +51,10 @@ public class JwtUtil {
                 .getSubject();
         return credentials;
     }
-    */
 
 
-    /*public boolean isValidToken(String token){
+
+    public boolean isValidToken(String token){
         // decrypt token
         String credentials = this.decryptToken(token);
         String email = credentials.split(":")[0];
@@ -62,6 +68,6 @@ public class JwtUtil {
             return true;
         }
         return false;
-    }*/
+    }
 
 }

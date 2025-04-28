@@ -36,7 +36,7 @@ public class ChannelController {
     }
 
     // {subscribers : [1, 2, 3, 4, 5, 6, 7, 8]}
-    @PutMapping("/{channelId}/subcribe")
+    @PutMapping("/{channelId}/subscribe")
     public void addSubscriber(@PathVariable UUID channelId,
                               @RequestParam UUID userId){
         // We need to call service
