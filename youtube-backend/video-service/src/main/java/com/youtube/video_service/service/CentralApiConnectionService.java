@@ -45,6 +45,18 @@ public class CentralApiConnectionService {
         }
 
     }
+    public boolean isValidToken(String token){
+        String endPoint = "/security/validate-token/" + token;
+        Object object = apiTemplate.makeGetCall(centralApiUrl,endPoint, new HashMap<>());
+        IsValidDTO resp = mapper.map(object, IsValidDTO.class);
+        return resp.isSuccess();
+    }
+    public String getCredentialFromToken(String token){
+        String endPoint = "/security/get-credential/" + token;
+        Object object = apiTemplate.makeGetCall(centralApiUrl, endPoint, new HashMap<>());
+        SecurityCredential securityCredential = mapper.map(object, SecurityCredential.class);
+        return securityCredential.getCredential();
+    }
     /* 
     public void saveVideoDetails(
         UUID channelId,
