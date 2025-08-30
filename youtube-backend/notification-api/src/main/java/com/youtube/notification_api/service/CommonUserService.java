@@ -17,13 +17,13 @@ import org.thymeleaf.context.Context;
 public class CommonUserService {
 
     @Autowired
-    TemplateEngine templateEngine;
+    TemplateEngine templateEngine; /* A template engine helps to generate dynamic content by replacing placeholders in templates with runtime data. In Spring Boot, Thymeleaf is commonly used for emails and web pages. */
 
     @Autowired
     MailService mailService;
 
     @Autowired
-    JavaMailSender javaMailSender;
+    JavaMailSender javaMailSender; /* JavaMailSender is a predefined Spring interface for sending emails. Spring Boot auto-configures its implementation (JavaMailSenderImpl) when spring-boot-starter-mail and mail properties are set.*/
 
     @Value("${youtube.platform.name}")
     String platformName;
@@ -37,7 +37,18 @@ public class CommonUserService {
         // Before getting html template we need to create variables inside html template
 
         log.info("Inside Common user service: " + mailHost);
-        Context context = new Context();
+        Context context = new Context(); /* Context in Thymeleaf holds the variables (key-value pairs) that are injected into a template so that dynamic content (like user name, order ID, platform name) can be rendered in emails or web pages.*/
+        /* Why is it created?
+
+        To inject dynamic values into a template.
+
+        Example: Suppose your email template (welcome-email.html) has this:
+
+        <p>Hello, <span th:text="${userName}"></span>!</p>
+        <p>Welcome to <span th:text="${platformName}"></span>.</p>
+
+        The Context provides userName and platformName, so Thymeleaf replaces them when rendering:*/
+
         context.setVariable("userName", notificationMessage.getName());
         context.setVariable("platformName", platformName);
         // We need to get our html template inform of string and all the variables popluated inside html template
@@ -56,12 +67,15 @@ public class CommonUserService {
 
     public void sendCreateChannelNotification(NotificationMessage message) throws Exception{
         log.info("CommonUserService:  Inside sendCreateChannelNotification method");
-        // We need to send html kind of email that your channel got created over our portal
+        // We need to send html kind of email that our channel got created over our portal
         Context context = new Context();//Context is a class from thymeleaf, it is just like a container of variables 
         context.setVariable("userName", message.getName());
         context.setVariable("platformName", platformName);
         String htmlEmailContent = templateEngine.process("create-channel-email", context);
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage(); /* MimeMessage is a standard JavaMail class for advanced emails (HTML, attachments). Spring’s JavaMailSender.createMimeMessage() is just a convenience method that creates and configures it using the SMTP settings from application.properties.*/
+        /* 🔹 Predefined or Custom?
+        ✅ MimeMessage → Predefined JavaMail class (comes from Jakarta/JavaMail library).
+        ✅ createMimeMessage() → A helper method in Spring’s JavaMailSender that instantiates a MimeMessage for you (instead of you creating new MimeMessage(session) manually).*/
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setTo(message.getEmail());
         mimeMessageHelper.setSubject("Your Channel is Live!");

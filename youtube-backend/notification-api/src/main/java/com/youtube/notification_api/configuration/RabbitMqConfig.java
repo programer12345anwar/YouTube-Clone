@@ -18,3 +18,14 @@ public class RabbitMqConfig {
 
 
 }
+/*
+Jackson2JsonMessageConverter → is a predefined class that converts Java objects ↔ JSON automatically.
+It’s like a translator 🗣️ between your Java code and RabbitMQ:
+
+When sending → Java object ➝ JSON ➝ RabbitMQ.
+
+When receiving → JSON ➝ Java object.
+
+Jackson ( is a popular JSON library).
+"We configure a Jackson2JsonMessageConverter so that RabbitMQ can automatically serialize/deserialize Java objects to JSON, instead of us manually handling message conversion."
+ */
