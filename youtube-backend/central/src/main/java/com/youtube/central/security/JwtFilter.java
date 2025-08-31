@@ -16,6 +16,7 @@ import java.util.Collections;
 //By extending class oncePerRequestFilter class we will be able to write our own Filter
 @Component
 public class JwtFilter extends OncePerRequestFilter {
+    //“OncePerRequestFilter is a base class in Spring that ensures my custom filter runs only once for each HTTP request. I usually extend it when writing filters for authentication, logging, or request validation.”
     @Autowired
     JwtUtil jwtUtil;
 

@@ -23,10 +23,10 @@ public class JwtUtil {
 
     Long expirationTime = 1200000L;//type casting long L
 
-    //Create JWT Token on the basis of creneditial
-    // As I mentioned in jwt token you are encrypting some information
+    //Create JWT Token on the basis of credential
+    // in jwt token we are encrypting some information
     // What information we are going to encrypt we are going to encrypt user credentials
-    // credentails = tiwarisomendra22@gmail.com:123456
+    // credential = mdanwar40212@gmail.com:123456
     // We got the credentials generateToken function we will encrypt credentials with the help of algorithm and secret key
 
     public String generateToken(String credentials){

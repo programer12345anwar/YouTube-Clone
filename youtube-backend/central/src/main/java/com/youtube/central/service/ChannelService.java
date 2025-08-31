@@ -90,7 +90,6 @@ public class ChannelService {
         subscribers.add(user);
 
         // {id : 1, descriptin: "Hello", subscribers: [{id : 1}, {id : 3}]}
-
         // I have updated list of subscribers for a particular channel object.
         // Whatever i have updated i need to save this changes in the database.
         channelRepo.save(channel);
