@@ -24,8 +24,7 @@ public class JwtUtil {
     Long expirationTime = 1200000L;//type casting long L
 
     //Create JWT Token on the basis of credential
-    // in jwt token we are encrypting some information
-    // What information we are going to encrypt we are going to encrypt user credentials
+    // in jwt token we are encrypting some information(we are going to encrypt user credentials)
     // credential = mdanwar40212@gmail.com:123456
     // We got the credentials generateToken function we will encrypt credentials with the help of algorithm and secret key
 

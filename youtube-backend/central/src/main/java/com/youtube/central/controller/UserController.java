@@ -15,6 +15,7 @@ import com.youtube.central.service.UserService;
 @RequestMapping("/api/central/user")
 @Slf4j
 public class UserController {
+
     @Autowired
     JwtUtil jwtUtil;
 
@@ -24,6 +25,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService=userService;
     }
+
     @PostMapping("/register")
     public String registerUser(@RequestBody AppUser user){
         userService.registerUser(user);

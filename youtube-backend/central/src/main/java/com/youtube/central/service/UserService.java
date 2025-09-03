@@ -22,8 +22,16 @@ public class UserService {
         this.appUserRepo = appUserRepo;
         this.rabbitMqService = rabbitMqService;
     }
-//    @Autowired
-//    private JwtUtil jwtUtil; //due to circular dependency
+// Autowired
+//  private JwtUtil jwtUtil; //due to circular dependency
+
+// 👉 "Circular dependency happens when two beans depend on each other, so Spring cannot decide which one to create first.
+//For example, Service A needs Service B, and Service B also needs Service A.
+//We can fix it by:
+//Redesigning our code to remove the dependency (best solution),
+
+//Or using @Lazy to delay bean creation,
+//Or using setter injection instead of constructor injection."
 
     public AppUser getUserByEmail(String email) {
         return appUserRepo.findByEmail(email);
