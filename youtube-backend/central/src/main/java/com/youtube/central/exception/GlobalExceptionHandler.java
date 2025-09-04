@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 public class GlobalExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler
-    public void exceptionHandling(Exception ex) throws  Exception{
+    public void exceptionHandling(Exception ex) throws  Exception {
 
     }
-
 }
