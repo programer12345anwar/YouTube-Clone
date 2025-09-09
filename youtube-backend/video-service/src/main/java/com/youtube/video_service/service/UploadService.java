@@ -69,7 +69,7 @@ public class UploadService {
             videoDetailsDTO.setUpdatedAt(LocalDateTime.now());
             videoDetailsDTO.setName(videoDetails.getName());
             videoDetailsDTO.setDescription(videoDetails.getDescription());
-            // log.info("this is videoDetailsDTO"+videoDetailsDTO);
+             log.info("this is videoDetailsDTO"+videoDetailsDTO);
             centralApiConnectionService.saveVideoDetails(channelId, videoDetailsDTO);
             return videoDetail;
     }
