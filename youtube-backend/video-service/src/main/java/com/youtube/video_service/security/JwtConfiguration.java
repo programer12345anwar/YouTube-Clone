@@ -14,18 +14,27 @@ public class JwtConfiguration {
     @Autowired
     JwtFilter jwtFilter;
 
+    // ✅ Public resources (Swagger + API docs)
+    private static final String[] FREE_RESOURCES = {
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/favicon.ico"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf()
-                .disable()
+        return http
+                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().authenticated() // all endpoints require authentication
+                        .requestMatchers(FREE_RESOURCES).permitAll()
+                        .anyRequest().authenticated()
                 )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
     }
 }
