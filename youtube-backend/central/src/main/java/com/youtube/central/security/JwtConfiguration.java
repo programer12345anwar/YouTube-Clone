@@ -14,20 +14,33 @@ public class JwtConfiguration {
     @Autowired
     JwtFilter jwtFilter;
 
+    private static final String[] FREE_RESOURCE_URLS = {
+            "/swagger-ui.html",
+            "/swagger-ui/**",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/webjars/**",
+            "/favicon.ico",
+            "/v3/api-docs/swagger-config"  // ✅ add this
+    };
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf()
-                .disable()
-                .authorizeHttpRequests(
-                        auth -> auth.requestMatchers(
-                                        "/api/central/user/register",
-                                        "/api/central/user/login",
-                                        "/api/v1/central/security/get-credential/**",
-                                        "/api/v1/central/security/validate-token/**"
-
-
-                                ).permitAll()
-                                .anyRequest().authenticated()
+        return http
+                .csrf().disable()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/central/user/register",
+                                "/api/central/user/login",
+                                "/api/v1/central/security/get-credential/**",
+                                "/api/v1/central/security/validate-token/**"
+                        ).permitAll()
+                        // ✅ add array separately
+                        .requestMatchers(FREE_RESOURCE_URLS).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
