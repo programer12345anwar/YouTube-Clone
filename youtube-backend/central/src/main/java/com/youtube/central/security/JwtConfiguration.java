@@ -23,7 +23,7 @@ public class JwtConfiguration {
             "/swagger-resources/**",
             "/webjars/**",
             "/favicon.ico",
-            "/v3/api-docs/swagger-config"  // ✅ add this
+            "/v3/api-docs/swagger-config"
     };
 
 

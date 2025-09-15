@@ -1,4 +1,4 @@
-package com.youtube.video_service.config;
+package com.youtube.video_service.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;

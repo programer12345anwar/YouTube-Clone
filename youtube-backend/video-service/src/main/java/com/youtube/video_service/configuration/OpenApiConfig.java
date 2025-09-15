@@ -1,4 +1,4 @@
-package com.youtube.video_service.config;
+package com.youtube.video_service.configuration;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
