@@ -13,13 +13,11 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // Allow Swagger UI to fetch API docs
-                registry.addMapping("/v3/api-docs")
-                        .allowedOrigins("http://localhost:8080") // central-api origin
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:8080")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
         };
     }
 }
-
