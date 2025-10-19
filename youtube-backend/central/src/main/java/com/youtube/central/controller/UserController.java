@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.youtube.central.models.AppUser;
 import com.youtube.central.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/central/user")
 @Slf4j
@@ -44,5 +46,11 @@ public class UserController {
             String token=jwtUtil.generateToken(resp);
             return new ResponseEntity(token,HttpStatus.OK);
         }
+    }
+
+
+    @GetMapping("/getUsersMorethan20")
+    public List<AppUser> getUsers(){
+       return userService.getUserBySubstcriber();
     }
 }

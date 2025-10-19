@@ -106,4 +106,9 @@ public class ChannelService {
 
         rabbitMqService.insertMessageToQueue(message);
     }
+
+    //placement mock
+    public List<Channel> getPopularChannels() {
+        return channelRepo.findPopularChannels();
+    }
 }

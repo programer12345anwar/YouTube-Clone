@@ -1,15 +1,11 @@
 package com.youtube.central.controller;
 
+import java.util.List;
 import java.util.UUID;
 
+import com.youtube.central.models.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.youtube.central.dto.CreateChannelRequestBody;
 import com.youtube.central.dto.VideoDetailsDTO;
@@ -48,6 +44,15 @@ public class ChannelController {
     public void saveVideoDetails(@RequestBody VideoDetailsDTO videoDetailsDTO,
                                  @PathVariable UUID channelId){
         videoService.saveVideoDetails(channelId, videoDetailsDTO);
+    }
+
+    //placement mock
+   /* “I’d create a custom JPA query in my ChannelRepo to fetch all channels having more than 20 videos and more than 50 subscribers.
+    I can use JPQL with the size() function or a native SQL subquery.
+    Then expose a REST endpoint /api/v1/central/channel/popular to return that filtered list to the frontend.” */
+    @GetMapping("/popular")
+    public List<Channel> getPopularChannels() {
+        return channelService.getPopularChannels();
     }
     
     

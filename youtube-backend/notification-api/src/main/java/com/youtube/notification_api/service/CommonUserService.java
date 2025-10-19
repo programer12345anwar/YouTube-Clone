@@ -74,8 +74,8 @@ public class CommonUserService {
         String htmlEmailContent = templateEngine.process("create-channel-email", context);
         MimeMessage mimeMessage = javaMailSender.createMimeMessage(); /* MimeMessage is a standard JavaMail class for advanced emails (HTML, attachments). Spring’s JavaMailSender.createMimeMessage() is just a convenience method that creates and configures it using the SMTP settings from application.properties.*/
         /* 🔹 Predefined or Custom?
-        ✅ MimeMessage → Predefined JavaMail class (comes from Jakarta/JavaMail library).
-        ✅ createMimeMessage() → A helper method in Spring’s JavaMailSender that instantiates a MimeMessage for you (instead of you creating new MimeMessage(session) manually).*/
+        MimeMessage → Predefined JavaMail class (comes from Jakarta/JavaMail library).
+        createMimeMessage() → A helper method in Spring’s JavaMailSender that instantiates a MimeMessage for you (instead of you creating new MimeMessage(session) manually).*/
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setTo(message.getEmail());
         mimeMessageHelper.setSubject("Your Channel is Live!");
