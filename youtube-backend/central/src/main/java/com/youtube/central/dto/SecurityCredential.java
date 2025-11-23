@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class SecurityCredential {
-    String credential;
+    private String credential;
 }

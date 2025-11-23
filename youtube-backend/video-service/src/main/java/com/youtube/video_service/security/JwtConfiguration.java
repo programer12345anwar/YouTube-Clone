@@ -14,7 +14,7 @@ public class JwtConfiguration {
     @Autowired
     JwtFilter jwtFilter;
 
-    // ✅ Public resources (Swagger + API docs)
+    // Public resources (Swagger + API docs)
     private static final String[] FREE_RESOURCES = {
             "/swagger-ui.html",
             "/swagger-ui/**",

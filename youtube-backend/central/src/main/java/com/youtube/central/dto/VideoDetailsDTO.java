@@ -7,11 +7,11 @@ import lombok.Data;
 
 @Data
 public class VideoDetailsDTO {
-    String id; // This id will get generated inside firebase
-    String name;
-    String description;
-    LocalDateTime uploadDateTime;
-    LocalDateTime updatedAt;
-    String videoLink;
-    List<String> tags;
+    private String id;
+    private String name;
+    private String description;
+    private LocalDateTime uploadDateTime;
+    private LocalDateTime updatedAt;
+    private String videoLink;
+    private List<String> tags;
 }

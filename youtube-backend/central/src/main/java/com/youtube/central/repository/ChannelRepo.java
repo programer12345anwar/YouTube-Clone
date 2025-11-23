@@ -13,7 +13,7 @@ import com.youtube.central.models.Channel;
 @Repository
 public interface ChannelRepo extends JpaRepository<Channel, UUID> {
 
-    // Using JPQL to filter based on list sizes and subscriber count
+    // Using JPQL to filter based on list sizes and subscriber count--->Placement mock
     @Query("SELECT c FROM Channel c WHERE size(c.videos) > 20 AND c.totalSubs > 50")
     List<Channel> findPopularChannels();
     //OR using native query

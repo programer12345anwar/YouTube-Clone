@@ -11,30 +11,10 @@ import java.util.Properties;
 @Configuration
 public class Config {
 
-//    @Bean
-//    public TemplateEngine getTemplateEngine(){
-//        return new TemplateEngine();
-//    }
-//
-//    @Bean
-//    public JavaMailSender getJavaMailSender(){
-//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl(); //JavaMailSenderImpl → is a built-in helper class for sending emails.
-//        mailSender.setHost("smtp.gmail.com");
-//        mailSender.setPort(587);
-//        mailSender.setUsername("your email will be there");
-//        mailSender.setPassword("your email app password");
-//        Properties props = mailSender.getJavaMailProperties();
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        return mailSender;
-//    }  for best practices
-
-//    @Bean
-//    public TemplateEngine templateEngine() {
-//        return new TemplateEngine();
-//    }
-    // No need to define JavaMailSender here,
-    // Spring Boot auto-configures it using application.properties
+    @Bean
+    public TemplateEngine getTemplateEngine(){
+        return new TemplateEngine();
+    }
 }
 
 

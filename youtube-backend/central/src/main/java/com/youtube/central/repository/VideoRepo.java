@@ -8,5 +8,4 @@ import com.youtube.central.models.Video;
 @Repository
 public interface VideoRepo extends JpaRepository<Video, String>{
 
-    
 }

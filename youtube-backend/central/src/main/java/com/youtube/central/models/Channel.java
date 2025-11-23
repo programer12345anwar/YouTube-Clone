@@ -17,22 +17,23 @@ import java.util.UUID;
 public class Channel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
+    private UUID id;
     @ManyToOne
-    AppUser user; // channel owner
-    String description;
-    String name;
-    Double watchHours;
-    boolean isMonetized;
-    int totalViews;
-    int totalLikeCount;
-    int totalSubs;
+    private AppUser user; // channel owner
+    private String description;
+    private String name;
+    private Double watchHours;
+    private boolean isMonetized;
+    private int totalViews;
+    private int totalLikeCount;
+    private int totalSubs;
     @OneToMany // ChannelId vs UserId
-    List<AppUser> subscribers;
+    private List<AppUser> subscribers;
+    // Add mappedBy for bidirectional link
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Video> videos;
     @OneToMany
-    List<Video> videos;
-    @OneToMany
-    List<PlayList> playLists;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    private List<PlayList> playLists;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

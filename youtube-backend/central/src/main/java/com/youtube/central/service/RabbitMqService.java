@@ -16,9 +16,9 @@ public class RabbitMqService {
             RabbitTemplate rabbitTemplate,
             @Value("${rabbitmq.exchange.name}") String exchangeName,
             @Value("${rabbitmq.routing.key}") String routingKey) {
-        this.rabbitTemplate = rabbitTemplate;
-        this.exchangeName = exchangeName;
-        this.routingKey = routingKey;
+            this.rabbitTemplate = rabbitTemplate;
+            this.exchangeName = exchangeName;
+            this.routingKey = routingKey;
     }
 
     public void insertMessageToQueue(NotificationMessage message) {

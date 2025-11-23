@@ -1,9 +1,6 @@
 package com.youtube.central.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
  import java.util.List;
@@ -18,13 +15,18 @@ import java.time.LocalDateTime;
 @Table(name = "videos")
 public class Video {
     @Id
-    String id; // This id will get generated inside firebase
-    String name;
-    String description;
-    LocalDateTime uploadDateTime;
-    LocalDateTime updatedAt;
-    String videoLink;
-    String thumbnailLink;
+    private String id; // This id will get generated inside firebase
+    private String name;
+    private String description;
+    private LocalDateTime uploadDateTime;
+    private LocalDateTime updatedAt;
+    private String videoLink;
+    private String thumbnailLink;
+    private int views; // Added
+    // Add this field to link back to Channel
+    @ManyToOne
+    @JoinColumn(name = "channel_id") // foreign key in Video table
+    private Channel channel;
     @OneToMany
-    List<Tag> tags;
+    private List<Tag> tags;
 }

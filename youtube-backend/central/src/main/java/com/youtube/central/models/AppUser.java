@@ -20,16 +20,16 @@ import java.util.UUID;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-    String name;
+    private UUID id;
+    private String name;
     @Column(unique = true)
-    String email;
-    String password;
+    private String email;
+    private String password;
     @Column(unique = true)
-    Long phoneNumber;
-    LocalDate dob;
-    String gender;
-    String country;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+    private Long phoneNumber;
+    private LocalDate dob;
+    private String gender;
+    private String country;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

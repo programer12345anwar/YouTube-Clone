@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class IsValidDTO {
-    boolean success;
-    String credentials;
+    private boolean success;
+    private String credentials;
 }

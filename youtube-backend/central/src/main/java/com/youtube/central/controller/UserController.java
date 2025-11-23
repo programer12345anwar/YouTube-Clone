@@ -49,8 +49,5 @@ public class UserController {
     }
 
 
-    @GetMapping("/getUsersMorethan20")
-    public List<AppUser> getUsers(){
-       return userService.getUserBySubstcriber();
-    }
+
 }

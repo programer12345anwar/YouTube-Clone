@@ -18,9 +18,9 @@ import java.util.UUID;
 public class UserTagHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    UUID userId;
-    UUID tagId;
-    int count;
-    LocalDateTime lastWatched;
+    private int id;
+    private UUID userId;
+    private UUID tagId;
+    private int count;
+    private LocalDateTime lastWatched;
 }

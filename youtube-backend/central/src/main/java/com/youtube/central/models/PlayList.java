@@ -25,10 +25,10 @@ import lombok.ToString;
 public class PlayList {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-    String name;
+    private UUID id;
+    private String name;
     @OneToOne
-    Channel channel;
+    private Channel channel;
     @OneToMany
-    List<Video> videos;
+    private List<Video> videos;
 }

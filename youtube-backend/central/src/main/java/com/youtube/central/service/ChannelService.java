@@ -43,10 +43,8 @@ public class ChannelService {
         String email=channelDetails.getUserEmail();
         //we need to check with this email user is registered or not
         AppUser user=userService.getUserByEmail(email);
-        //if user is registered then we need to create channel
         if(user==null){
             //user is not registered
-            //  thow new UserNotFound("user with email "+email+" is not registered");
             throw new UserNotFound(String.format("user with email %s does not exist in our system",email));
         }
         //we need to create channel
@@ -88,15 +86,9 @@ public class ChannelService {
         channel.setTotalSubs(channel.getTotalSubs() + 1);
         List<AppUser> subscribers = channel.getSubscribers();
         subscribers.add(user);
-
-        // {id : 1, descriptin: "Hello", subscribers: [{id : 1}, {id : 3}]}
-        // I have updated list of subscribers for a particular channel object.
-        // Whatever i have updated i need to save this changes in the database.
         channelRepo.save(channel);
 
-        // channelowner should get mail hey new susbcriber added in your channel
-
-
+        // channel owner should get mail hey new subscriber added in your channel
         // Notification Message -> I will pass this notification message to the messaging queue
 
         NotificationMessage message = new NotificationMessage();

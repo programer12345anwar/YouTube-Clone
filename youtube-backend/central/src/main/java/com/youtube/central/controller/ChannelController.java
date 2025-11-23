@@ -31,12 +31,10 @@ public class ChannelController {
         channelService.createChannel(channelDetails);
     }
 
-    // {subscribers : [1, 2, 3, 4, 5, 6, 7, 8]}
+
     @PutMapping("/{channelId}/subscribe")
     public void addSubscriber(@PathVariable UUID channelId,
                               @RequestParam UUID userId){
-        // We need to call service
-
         channelService.addSubscriber(userId, channelId);
     }
 

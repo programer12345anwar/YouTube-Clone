@@ -19,16 +19,12 @@ public class VideoService {
 
     @Autowired
     ChannelService channelService;
-
     @Autowired
     TagService tagService;
-
     @Autowired
     VideoRepo videoRepo;
-
     @Autowired
     RabbitMqService rabbitMqService;
-
     String videoLink;
 
     public void saveVideo(Video video){
@@ -45,11 +41,8 @@ public class VideoService {
         video.setVideoLink(videoDetailsDTO.getVideoLink());
         video.setUpdatedAt(videoDetailsDTO.getUpdatedAt());
         video.setUploadDateTime(videoDetailsDTO.getUploadDateTime());
-        // from video api we are getting list<String> tags but to create video model object we need tags as List<Tag>
+
         List<String> tags = videoDetailsDTO.getTags();
-        // In this list we can get the tags which are already registered in our database or which are new tags
-        // If a tag is already present in tags table then we need to get the tag from table
-        // if not present i will create a new tag inside my table
         List<Tag> dbTagList = tagService.getAllTagsFromSystem(tags);
         video.setTags(dbTagList);
         // save these video details inside video table.
@@ -72,7 +65,4 @@ public class VideoService {
             rabbitMqService.insertMessageToQueue(notificationMessage);
         }
     }
-
-
-
 }

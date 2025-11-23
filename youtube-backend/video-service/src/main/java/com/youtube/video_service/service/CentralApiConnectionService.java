@@ -57,31 +57,6 @@ public class CentralApiConnectionService {
         SecurityCredential securityCredential = mapper.map(object, SecurityCredential.class);
         return securityCredential.getCredential();
     }
-    /* 
-    public void saveVideoDetails(
-        UUID channelId,
-        VideoDetailsDTO videoDetailsDTO,
-        String token
-    ){
-        // i need to call save video details endpoint declared in your  channel controller of central api
-        String endPoint = "/channel/" + channelId.toString() +  "/video/upload";
-        // apiurl, endpoint, queryparams, requestbody
-        Object resp = apiTemplate.makePostCall(centralApiUrl, endPoint, new HashMap<>(), videoDetailsDTO, token);
-    }
 
-    public boolean isValidToken(String token){
-        String endPoint = "/security/validate-token/" + token;
-        Object object = apiTemplate.makeGetCall(centralApiUrl,endPoint, new HashMap<>());
-        IsValidDTO resp = mapper.map(object, IsValidDTO.class);
-        return resp.isSuccess();
-    }
-
-    public String getCredentialFromToken(String token){
-        String endPoint = "/security/get-credential/" + token;
-        Object object = apiTemplate.makeGetCall(centralApiUrl, endPoint, new HashMap<>());
-        SecurityCredential securityCredential = mapper.map(object, SecurityCredential.class);
-        return securityCredential.getCredential();
-    }
-    */
 }
 

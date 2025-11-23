@@ -14,14 +14,14 @@ import io.imagekit.sdk.config.Configuration;
 @org.springframework.context.annotation.Configuration
 public class AppConfig {
 
-    @Value("${image.url.endpoint}") //@Value annotation help us to get the value of a property defined in app properties file
+    @Value("${image.url.endpoint}")
     String urlEndPoint;
     @Value("${image.private.key}")
     String privateKey;
     @Value("${image.public.key}")
     String publicKey;
 
-    @Bean //@Bean → tells Spring to create and manage an object.
+    @Bean
     public ImageKit getImageKit() throws Exception{
          ImageKit imageKit = ImageKit.getInstance();
          Configuration configuration = new Configuration(publicKey, privateKey, urlEndPoint);//this will helps to connect with imagekit server
@@ -40,14 +40,13 @@ public class AppConfig {
 
     @Bean
     public ApiTemplate getApiTemplate(){
-        //you are telling Spring: “Hey, whenever someone asks for an ApiTemplate, give them an ApiTemplateImpl"
         return new ApiTemplateImpl();
     }
     
 
     @Bean
     public RestTemplate getRestTemplate(){
-        //RestTemplate → makes API calls to other services., it is a type of synchronous communication so current thread will be blocked and will wait for the response
+        //RestTemplate → makes API calls to other services.
         return new RestTemplate();
     }
         

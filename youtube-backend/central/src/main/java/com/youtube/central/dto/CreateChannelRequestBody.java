@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CreateChannelRequestBody {
-    String userEmail;
-    String channelName;
-    String description;
+    private String userEmail;
+    private String channelName;
+    private String description;
 }

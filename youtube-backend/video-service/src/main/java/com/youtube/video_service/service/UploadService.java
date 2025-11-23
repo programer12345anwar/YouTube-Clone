@@ -33,7 +33,7 @@ public class UploadService {
     CentralApiConnectionService centralApiConnectionService;
 
     public boolean isVideoFile(MultipartFile file){
-        boolean res = file.getContentType().startsWith("video/");//for image upload "image/"
+        boolean res = file.getContentType().startsWith("video/");  //for image upload "image/"
         return res;
     }
 

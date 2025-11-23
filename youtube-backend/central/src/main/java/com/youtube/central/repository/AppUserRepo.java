@@ -10,5 +10,5 @@ import com.youtube.central.models.AppUser;
 @Repository
 public interface AppUserRepo extends JpaRepository<AppUser, UUID> {
    public AppUser findByEmail(String email); //hibernate will automatically implement this method to find the user by email
-   public AppUser getUser
+
 }

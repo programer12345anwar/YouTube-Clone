@@ -20,10 +20,9 @@ import com.youtube.video_service.service.UploadService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController //@Controller + @ResponseBody annotations
+@RestController
 @RequestMapping("/api/v1/video")
-@Slf4j //it provides a common interface for logging, without tying the code to any specific logging framework (like Log4j, Logback, JUL).
-// It makes code flexible, portable, and maintainable, since you can switch the logging implementation easily just by changing dependencies — no code changes needed.
+@Slf4j
 public class VideoController {
 
   @Autowired
@@ -34,12 +33,6 @@ public class VideoController {
     public ResponseEntity uploadVideo(@RequestPart("videoFile")MultipartFile video,
                                       @RequestParam UUID channelId,
                                       @RequestPart("videodetails") VideoDetailRequestBody videoDetails){
-        /*
-        👉 @RequestParam is used to bind simple request parameters like strings, numbers, or form fields.
-        👉 @RequestPart is used in multipart requests to handle files or JSON objects.
-
-        In short: @RequestParam = simple data, @RequestPart = files/complex data.
-         */
 
         try{
             log.info("received call to upload video at video controller");
@@ -49,15 +42,6 @@ public class VideoController {
             GeneralMessage generalMessage = new GeneralMessage();
             generalMessage.setMessage(invalidFileType.getMessage());
             return new ResponseEntity(generalMessage, HttpStatus.BAD_REQUEST);
-            //ResponseEntity is a Spring class used to return an HTTP response from a controller.
-            //
-            //It lets you control:
-            //
-            //Body (what data to send back)
-            //
-            //Status Code (like 200 OK, 404 Not Found, etc.)
-            //
-            //Headers (extra info like content type).
         }catch (Exception e){
             GeneralMessage generalMessage = new GeneralMessage();
             generalMessage.setMessage(e.getMessage());
@@ -65,23 +49,4 @@ public class VideoController {
         }
     }
 
-    /* function to upload video on imagekit 
-    @PostMapping("/upload")
-    public ResponseEntity uploadVideo(@RequestPart("videoFile") MultipartFile video) {
-    log.info("video received at upload method");
-    try {
-        VideoDetail videoDetail = uploadService.uploadVideo(video);
-        log.info("Video detail after upload is {}", videoDetail);
-        return new ResponseEntity(videoDetail, HttpStatus.CREATED); // 201
-    } catch (InvalidFileType invalidFileType) {
-        GeneralMessage generalMessage = new GeneralMessage();
-        generalMessage.setMessage(invalidFileType.getMessage());
-        return new ResponseEntity(generalMessage, HttpStatus.BAD_REQUEST);
-    } catch (Exception e) {
-        GeneralMessage generalMessage = new GeneralMessage();
-        generalMessage.setMessage(e.getMessage());
-        return new ResponseEntity(generalMessage, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-    }
-    */
 }

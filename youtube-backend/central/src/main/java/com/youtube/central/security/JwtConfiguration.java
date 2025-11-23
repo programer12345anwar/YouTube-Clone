@@ -38,7 +38,7 @@ public class JwtConfiguration {
                                 "/api/v1/central/security/get-credential/**",
                                 "/api/v1/central/security/validate-token/**"
                         ).permitAll()
-                        // ✅ add array separately
+                        // add array separately
                         .requestMatchers(FREE_RESOURCE_URLS).permitAll()
                         .anyRequest().authenticated()
                 )
