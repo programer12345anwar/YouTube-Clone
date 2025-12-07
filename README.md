@@ -12,6 +12,14 @@ It simulates real-world video platform features such as:
 ✅ Asynchronous Notifications
 ✅ High Scalability & Decoupled Services
 
+Screenshots:
+<img width="1920" height="1538" alt="screencapture-localhost-8080-swagger-ui-index-html-2025-12-08-01_23_23" src="https://github.com/user-attachments/assets/fafe53b5-6d75-4baa-8c80-399239272273" />
+
+<img width="1920" height="1028" alt="screencapture-localhost-8080-swagger-ui-index-html-2025-12-08-01_22_41" src="https://github.com/user-attachments/assets/b2ef0c48-61fd-4b49-8b7c-28548851685b" />
+
+<img width="1920" height="970" alt="screencapture-localhost-8080-swagger-ui-index-html-2025-12-08-01_22_22" src="https://github.com/user-attachments/assets/0be38dd8-1de3-4244-8f1b-ac34a02ed137" />
+
+
 🏗️ Microservices Architecture
 
 The backend is divided into three independent microservices:
