@@ -18,10 +18,10 @@ public class Channel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    private String name; //channel name
     @ManyToOne
     private AppUser user; // channel owner
     private String description;
-    private String name;
     private Double watchHours;
     private boolean isMonetized;
     private int totalViews;
@@ -29,7 +29,7 @@ public class Channel {
     private int totalSubs;
     @OneToMany // ChannelId vs UserId
     private List<AppUser> subscribers;
-    // Add mappedBy for bidirectional link
+    //mappedBy for bidirectional link
     @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Video> videos;
     @OneToMany
