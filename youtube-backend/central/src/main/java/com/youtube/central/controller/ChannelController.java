@@ -52,6 +52,13 @@ public class ChannelController {
     public List<Channel> getPopularChannels() {
         return channelService.getPopularChannels();
     }
+
+    @GetMapping("/channelWithTag")
+    public List<Channel> getChannelByTag(@RequestParam String tag){
+        return channelService.getChannels(tag);
+    }
+
+
     
     
 }

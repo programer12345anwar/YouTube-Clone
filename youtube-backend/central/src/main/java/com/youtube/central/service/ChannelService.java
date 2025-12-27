@@ -103,4 +103,11 @@ public class ChannelService {
     public List<Channel> getPopularChannels() {
         return channelRepo.findPopularChannels();
     }
+
+    public List<Channel> getChannels(String tag){
+        List<Channel> channels=channelRepo.findAll();
+        return  channels.stream()
+                .filter(c->c.getVideos().stream()
+                        .anyMatch(v->v.getTags().contains(tag))).toList();
+    }
 }
